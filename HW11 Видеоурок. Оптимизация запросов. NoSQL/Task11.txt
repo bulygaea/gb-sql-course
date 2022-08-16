@@ -1,0 +1,40 @@
+# Выполнение команд в терминале
+# task_2_1
+## В базе данных Redis подберите коллекцию для подсчета посещений с определенных IP-адресов.
+### Для хранения количества посещений с определенных IP-адресов лучше всего подойдет структура Хэш, где ключом будет
+### IP-адрес, а значением - количество посещений
+
+# task_2_2
+## При помощи базы данных Redis решите задачу поиска имени пользователя по электронному адресу и наоборот,
+## поиск электронного адреса пользователя по его имени.
+HMSET fst:iam@first name fst email iam@first
+HMSET snd:iam@second name snd email iam@second
+HMSET thd:iam@third name thd email iam@third
+
+KEYS *:iam@second
+                     # 1) "snd:iam@second"
+KEYS snd:*
+                     # 1) "snd:iam@second"
+HGETALL snd:iam@second
+                     # 1) "name"
+                     # 2) "snd"
+                     # 3) "email"
+                     # 4) "iam@second"
+
+# task_2_3
+## Организуйте хранение категорий и товарных позиций учебной базы данных shop в СУБД MongoDB.
+$id = 1
+db.shop.insert({catalogs: {id: $id++, name: 'Процессоры'}})
+db.shop.insert({catalogs: {id: $id++, name: 'Материнские платы'}})
+db.shop.insert({catalogs: {id: $id++, name: 'Видеокарты'}})
+db.shop.insert({catalogs: {id: $id++, name: 'Жесткие диски'}})
+db.shop.insert({catalogs: {id: $id++, name: 'Оперативная память'}})
+
+$id = 1
+db.shop.insert({products: {id: $id++, name: 'Intel Core i3-8100', description: 'Процессор для настольных персональных компьютеров, основанных на платформе Intel.', price: 7890.00, catalog_id: 1, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'Intel Core i5-7400', description: 'Процессор для настольных персональных компьютеров, основанных на платформе Intel.', price: 12700.00, catalog_id: 1, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'AMD FX-8320E', description: 'Процессор для настольных персональных компьютеров, основанных на платформе AMD.', price: 4780.00, catalog_id: 1, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'AMD FX-8320', description: 'Процессор для настольных персональных компьютеров, основанных на платформе AMD.', price: 7120.00, catalog_id: 1, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'ASUS ROG MAXIMUS X HERO', description: 'Материнская плата ASUS ROG MAXIMUS X HERO, Z370, Socket 1151-V2, DDR4, ATX', price: 19310.00, catalog_id: 2, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'Gigabyte H310M S2H', description: 'Материнская плата Gigabyte H310M S2H, H310, Socket 1151-V2, DDR4, mATX', price: 4790.00, catalog_id: 2, created_at: Date()}})
+db.shop.insert({products: {id: $id++, name: 'MSI B250M GAMING PRO', description: 'Материнская плата MSI B250M GAMING PRO, B250, Socket 1151, DDR4, mATX', price: 5060.00, catalog_id: 2, created_at: Date()}})
